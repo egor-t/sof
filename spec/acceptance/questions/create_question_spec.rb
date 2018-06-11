@@ -8,22 +8,23 @@ feature 'Create question', %q(
 
   let(:user) { create(:user) }
 
+  # Form elements
+  let(:ask_question) { 'Ask question' }
+
   scenario 'Authenticated user create question' do
     sign_in user
 
     visit questions_path
-    click_on 'Ask question'
-
-    fill_in 'Title', with: 'Test question'
-    fill_in 'Body', with: 'Some problem'
-    click_on 'Create'
+    click_on ask_question
+    # Question helper
+    create_question('Test question', 'Some problem')
 
     expect(page).to have_content 'Your question was successfully created.'
   end
 
   scenario 'Non-authenticated user try to create question' do
-    visit '/questions'
-    click_on 'Ask question'
+    visit questions_path
+    click_on ask_question
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
