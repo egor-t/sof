@@ -11,7 +11,7 @@ feature 'Create question', %q(
   scenario 'Authenticated user create question' do
     sign_in user
 
-    visit '/questions'
+    visit questions_path
     click_on 'Ask question'
 
     fill_in 'Title', with: 'Test question'
