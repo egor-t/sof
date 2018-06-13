@@ -19,7 +19,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include AcceptanceHelper, type: :feature
   config.include QuestionHelper, type: :feature
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
 
 Shoulda::Matchers.configure do |config|

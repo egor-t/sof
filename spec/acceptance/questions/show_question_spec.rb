@@ -6,7 +6,8 @@ feature 'Show question', %q(
   so I can see answers for that question
 ) do
 
-  let!(:question1) { Question.create(title: 'Test1', body: 'Body1') }
+  let(:user) { create(:user) }
+  let!(:question1) { Question.create(title: 'Test1', body: 'Body1', user: user) }
 
   scenario 'As user get exist question' do
     visit questions_path(question1)
