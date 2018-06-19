@@ -1,24 +1,10 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy]
   before_action :find_question
 
 
-  def show
-    @answer = @question.answers.find(params[:id])
-  end
-
-  def new
-    @answer = @question.answers.build
-  end
-
   def create
-    @answer = @question.answers.build(answer_params.merge({ user: current_user }))
-    if @answer.save
-      flash[:notice] = 'Your answer was successfully created.'
-      redirect_to question_path(@question)
-    else
-      render 'questions/show'
-    end
+    @answer = @question.answers.create(answer_params.merge({ user: current_user }))
   end
 
   def destroy

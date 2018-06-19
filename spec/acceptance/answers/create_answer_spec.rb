@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'acceptance/acceptance_helper'
 
 feature 'Create answer to question', %q(
   As a user,
@@ -11,7 +11,7 @@ feature 'Create answer to question', %q(
   let(:user) { create(:user) }
   let!(:question) { Question.create(title: 'Test1', body: 'Body1', user: question_owner) }
 
-  scenario 'As an authenticated user answer to question with valid data' do
+  scenario 'As an authenticated user answer to question with valid data', js: true  do
     sign_in user
 
     visit question_path(question)
@@ -19,23 +19,20 @@ feature 'Create answer to question', %q(
     fill_in 'Body', with: 'Perfect answer'
     click_on 'Answer it'
 
-    expect(page).to have_content('Perfect answer')
-    expect(page).to have_content('Your answer was successfully created.')
+    within '.answers' do
+      expect(page).to have_content('Perfect answer')
+    end
     expect(current_path).to eq question_path(question)
   end
 
-  scenario 'As an authenticated user answer to question with invalid data' do
-    sign_in user
-
+  scenario 'Authenticated user create answer with invalid data', js: true do
+    sign_in(user)
     visit question_path(question)
 
-    fill_in 'Body', with: ''
     click_on 'Answer it'
 
     expect(page).to have_content("Body can't be blank")
-    expect(current_path).to eq "#{question_path(question)}/answers"
   end
-
 
   scenario 'As non-authenticated user try to answer to question with valid data' do
     visit question_path(question)

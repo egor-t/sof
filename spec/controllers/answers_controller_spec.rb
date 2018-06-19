@@ -4,61 +4,46 @@ RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question) }
   let(:user) { create(:user) }
 
-
-  describe 'GET #show' do
-    let(:answer) { create(:answer, question: question) }
-
-    before { get :show, params: { question_id: question, id: answer }}
-
-    it 'should assigns the requested question to @question' do
-      expect(assigns(:answer)).to eq answer
-    end
-
-    it 'should render show view' do
-      expect(response).to render_template :show
-    end
-  end
-
-  describe 'GET #new' do
-    before { sign_in user }
-    before { get :new, params: { question_id: question }}
-
-    it 'should assigns a new Answer to @answer' do
-      expect(assigns(:answer)).to be_a_new(Answer)
-    end
-
-    it 'should render new view' do
-      expect(response).to render_template :new
-    end
-  end
+  before { sign_in user }
 
   describe 'POST #create' do
-    before { sign_in user }
-
     context 'with valid attributes' do
-      let(:create_request) { post :create, params: { question_id: question, answer: attributes_for(:answer) }}
+      let(:create_request) { post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js }
 
-      it 'should save the new question in the database' do
+      it 'saves the new question in the database' do
         expect{ create_request }.to change(question.answers, :count).by(1)
       end
 
-      it 'should redirect to show view' do
+      it 'render a create view' do
         create_request
-        expect(response).to redirect_to question_path(assigns(:question))
+        expect(response).to render_template :create
       end
     end
 
     context 'with invalid attributes' do
-      let(:create_request) { post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) }}
+      let(:create_request) { post :create, params: { question_id: question, answer: attributes_for(:invalid_answer) }, format: :js }
 
       it 'should does not save answer in database' do
         expect { create_request }.to_not change(Answer, :count)
       end
+    end
+  end
 
-      it 'should redirect to new view' do
-        create_request
-        expect(response).to render_template 'questions/show'
-      end
+  describe 'DELETE #destroy' do
+    let!(:user_answer)  { create(:answer, question: question, user: user) }
+    let!(:user2_answer)     { create(:answer, question: question) }
+
+    it 'delete my answer' do
+      expect { delete :destroy, params: { id: user_answer, question_id: question }}.to change(question.answers, :count).by(-1)
+    end
+
+    it 'redirect to show view after delete my answer' do
+      delete :destroy, params: { id: user_answer, question_id: question }
+      expect(response).to redirect_to question_path(question)
+    end
+
+    it 'delete foreign answer' do
+      expect { delete :destroy, params: { id: user2_answer, question_id: question }}.to_not change(question.answers, :count)
     end
   end
 end

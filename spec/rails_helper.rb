@@ -20,6 +20,7 @@ RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature
   config.include QuestionHelper, type: :feature
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Capybara::DSL
 end
 
 Shoulda::Matchers.configure do |config|
