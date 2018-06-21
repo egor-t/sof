@@ -3,6 +3,11 @@ class AnswersController < ApplicationController
   before_action :find_question
 
 
+  def update
+    @answer = Answer.find(params[:id])
+    @answer.update(answer_params)
+  end
+
   def create
     @answer = @question.answers.create(answer_params.merge({ user: current_user }))
   end

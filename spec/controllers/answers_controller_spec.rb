@@ -46,4 +46,25 @@ RSpec.describe AnswersController, type: :controller do
       expect { delete :destroy, params: { id: user2_answer, question_id: question }}.to_not change(question.answers, :count)
     end
   end
+
+  describe 'PATCH #update' do
+    let!(:answer) {create :answer, question: question }
+    context 'with valid attributes' do
+      it 'should assigns the requested answer to @answer' do
+        patch :update, params: { id: answer, question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(assigns(:answer)).to eq answer
+      end
+
+      it 'should update exist answer in database' do
+        patch :update, params: { id: answer, question_id: question,  answer: { body: 'NEW BODY' }, format: :js }
+        answer.reload
+        expect(answer.body).to eq 'NEW BODY'
+      end
+
+      it 'should render update answer' do
+        patch :update, params: { id: answer, question_id: question,  answer: attributes_for(:answer) }, format: :js
+        expect(response).to render_template :update
+      end
+    end
+  end
 end
