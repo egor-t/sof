@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Make favorite answer for question', %q(
+feature 'Make favorite answer for question', '
   As a author of question
   I want to choose favorite answer,
   so I can finish my problem
-) do
+' do
 
   let(:user) { create(:user) }
   let(:owner_question) { create(:user) }
@@ -15,7 +17,6 @@ feature 'Make favorite answer for question', %q(
     it 'owner choose favorite answer for his question' do
       sign_in(owner_question)
       visit question_path(question)
-
 
       within '.answers' do
         click_on 'Best answer'

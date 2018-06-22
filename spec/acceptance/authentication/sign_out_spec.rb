@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'User sign out', %q(
+feature 'User sign out', '
   As an authenticated user,
   I want to be able sign out,
   so I can to finish my session
-) do
+' do
 
   let(:user) { create(:user) }
 
@@ -13,7 +15,7 @@ feature 'User sign out', %q(
 
     click_on 'Sign out'
 
-    expect(page).to  have_content('Signed out successfully.')
+    expect(page).to have_content('Signed out successfully.')
     expect(current_path).to eq root_path
   end
 end

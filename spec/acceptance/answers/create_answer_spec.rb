@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Create answer to question', %q(
+feature 'Create answer to question', '
   As a user,
   I want to answer for the question,
   so I can solve problem of community
-) do
-
+' do
 
   let(:question_owner) { create(:user) }
   let(:user) { create(:user) }
   let!(:question) { Question.create(title: 'Test1', body: 'Body1', user: question_owner) }
 
-  scenario 'As an authenticated user answer to question with valid data', js: true  do
+  scenario 'As an authenticated user answer to question with valid data', js: true do
     sign_in user
 
     visit question_path(question)

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module AnswersHelper
   def show_error_messages(answer)
-    data = ""
+    data = ''
     answer.errors.full_messages.each do |message|
-      data << "#{ j message }"
-      data << '<br/>'
+      data += message.dup
+      data += '<br/>'
     end
     data.html_safe
   end

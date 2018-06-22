@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module QuestionHelper
   def create_question(title, body)
     fill_in 'Title', with: title

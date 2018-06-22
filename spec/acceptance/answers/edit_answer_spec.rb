@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Answer editing', %q(
+feature 'Answer editing', '
   As a author of answer,
   I want to edit my answer,
   so I can fix mistake
-) do
+' do
   let(:question_owner) { create(:user) }
   let(:answer_user) { create(:user) }
   let(:question) { Question.create(title: 'Test1', body: 'Body1', user: question_owner) }
   let!(:answer) { create :answer, question: question, user: answer_user }
-
 
   scenario 'Unauthenticated user try to edit the answer' do
     visit question_path(question)
@@ -24,7 +25,6 @@ feature 'Answer editing', %q(
     expect(page).not_to have_link('Edit answer')
   end
 
-
   describe 'Authenticated user(owner)', js: true do
     before do
       sign_in(answer_user)
@@ -37,7 +37,7 @@ feature 'Answer editing', %q(
       end
     end
 
-    scenario 'should see fixed answer after updated'  do
+    scenario 'should see fixed answer after updated' do
       click_on 'Edit answer'
 
       # save_and_open_page?
@@ -46,7 +46,6 @@ feature 'Answer editing', %q(
         fill_in 'Answer', with: 'edited answer'
         click_on 'Save answer'
       end
-
 
       within '.answers' do
         expect(page).to have_content('edited answer')

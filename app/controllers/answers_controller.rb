@@ -1,8 +1,9 @@
-class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
-  before_action :find_question
-  before_action :find_answer, only: %i(update destroy best_answer)
+# frozen_string_literal: true
 
+class AnswersController < ApplicationController
+  before_action :authenticate_user!, only: %i[create destroy]
+  before_action :find_question
+  before_action :find_answer, only: %i[update destroy best_answer]
 
   def update
     @answer = Answer.find(params[:id])
@@ -10,7 +11,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.create(answer_params.merge({ user: current_user }))
+    @answer = @question.answers.create(answer_params.merge(user: current_user))
   end
 
   def best_answer

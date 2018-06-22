@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Show question', %q(
+feature 'Show question', '
   As a non-authenticated user,
   I want to see question,
   so I can see answers for that question
-) do
+' do
 
   let(:user) { create(:user) }
   let!(:question1) { Question.create(title: 'Test1', body: 'Body1', user: user) }

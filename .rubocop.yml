@@ -1,0 +1,17 @@
+AllCops:
+  TargetRubyVersion: 2.4.2
+  DisplayCopNames: true
+  Exclude:
+    - 'test/**/*'
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+
+# Customize rules
+Metrics/LineLength:
+  Max: 120
+
+MethodLength:
+  Max: 30

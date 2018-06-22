@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Delete answer to question', %q(
+feature 'Delete answer to question', '
   As a user,
   I want to delete the answer for the question,
   so I can change my mind about answer
-) do
-
+' do
 
   let(:question_owner) { create(:user) }
   let(:answer_owner) { create(:user) }

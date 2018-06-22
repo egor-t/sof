@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Show all questions', %q(
+feature 'Show all questions', '
   As a non-authenticated user,
   I want to see all questions,
   so I can get answer for my problem
-) do
+' do
 
   let(:user) { create(:user) }
   let!(:question1) { Question.create(title: 'Test1', body: 'Body1', user: user) }

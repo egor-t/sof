@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'User sign in', %q(
+feature 'User sign in', '
   As a user,
   I want to be able sign in,
   so I can to ask question
-) do
+' do
 
   let(:user) { create(:user) }
 
   scenario 'Registered user try to sign in' do
     sign_in user
 
-    expect(page).to  have_content('Signed in successfully.')
+    expect(page).to have_content('Signed in successfully.')
     expect(current_path).to eq root_path
   end
 
@@ -22,7 +24,7 @@ feature 'User sign in', %q(
     fill_in 'Password', with: '12345'
     click_on 'Log in'
 
-    expect(page).to  have_content('Invalid Email or password.')
+    expect(page).to have_content('Invalid Email or password.')
     expect(current_path).to eq new_user_session_path
   end
 end

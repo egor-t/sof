@@ -1,15 +1,15 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'User delete question', %q{
+feature 'User delete question', '
   In order to destroy question
   As an author
   I want destroy only my questions
-} do
+' do
 
-  let(:owner)   { create(:user) }
+  let(:owner) { create(:user) }
   let(:regular_user) { create(:user) }
-
-
 
   context 'As an author' do
     before { sign_in(owner) }

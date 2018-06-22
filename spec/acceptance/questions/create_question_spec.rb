@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'acceptance/acceptance_helper'
 
-feature 'Create question', %q(
+feature 'Create question', '
   As an authenticated user,
   I want to create question,
   so I can get answer for my problem
-) do
+' do
 
   let(:user) { create(:user) }
 

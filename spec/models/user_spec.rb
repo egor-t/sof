@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -11,7 +13,7 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
 
     let!(:some_answer) { create(:answer) }
-    let!(:answer) { create(:answer, user: user)}
+    let!(:answer) { create(:answer, user: user) }
 
     it 'check owner answer' do
       expect(user.author_of?(answer)).to eq true
@@ -21,5 +23,4 @@ RSpec.describe User, type: :model do
       expect(user.author_of?(some_answer)).to eq false
     end
   end
-
 end
