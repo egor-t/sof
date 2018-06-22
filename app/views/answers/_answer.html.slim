@@ -1,16 +1,26 @@
 - if answer.persisted?
-  .border
+  br
+  .block
+    = 'That is the best answer' if answer.best_answer?
     .card.answer data-answer-id="#{answer.id}"
       p
         = answer.body
-      - if user_signed_in? && current_user.author_of?(answer)
-        = link_to 'Delete answer', question_answer_path(answer.question, answer), method: :delete, class: 'btn btn-danger'
-        = link_to 'Edit answer', '', class: 'edit-answer-link btn btn-warning', data: { answer_id: answer.id }
+      .btn-group
+        - if user_signed_in? && current_user.author_of?(answer)
+          = link_to 'Delete answer', question_answer_path(answer.question, answer), method: :delete, class: 'btn btn-danger'
+          = link_to 'Edit answer', '', class: 'edit-answer-link btn btn-warning', data: { answer_id: answer.id }
+        - if user_signed_in? && current_user.author_of?(@question)
+          = link_to 'Best answer', best_answer_question_answer_path(answer.question, answer), method: :patch,
+                                     remote: true, class: 'best-answer-btn btn btn-success', id: "best-answer-link-#{answer.id}"
       p
         = form_for [@question, answer], remote: true, data: { id: "edit-answer-#{answer.id}" } do |f|
           = f.label :body, 'Answer'
           = f.text_area :body
           = f.submit 'Save answer', class: 'btn'
+
+
+
+
 
 javascript:
     $('.edit-answer-link').on('click', function (e) {
@@ -18,4 +28,10 @@ javascript:
         $(this).hide();
         var answer_id = $(this).parents('.answer').data('answerId');
         $('form#edit_answer_' + answer_id).show();
+        $('#best-answer-link-' + answer_id).hide();
+        $('#delete-answer-link-' + answer_id).hide();
     });
+
+
+
+br

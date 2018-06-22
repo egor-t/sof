@@ -13,7 +13,7 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = csrf_meta_tags
-  body.user data-current-user-id="#{current_user&.id}"
+  body.user data-current-user-id="#{current_user&.id}"  data-spy="scroll"
     = render 'layouts/nav'
     .container
       - flash.each do |name, msg|
@@ -27,4 +27,4 @@ html
       #errors-messages
       = yield
 
-      = render "layouts/footer"
+    = render "layouts/footer"

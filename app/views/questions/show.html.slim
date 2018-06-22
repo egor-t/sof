@@ -8,7 +8,7 @@
 hr
 
 h5 Answers
-.answers.border.border-warning
+.answers
   = form_for [@question, @answer], remote: true do |f|
     .form-group
       = f.label :body
@@ -18,5 +18,5 @@ h5 Answers
       = f.submit 'Answer it', class: 'btn btn-primary'
 
   hr
-  = render @question.answers
+  = render @question.answers.sorted_by_best_answer
 

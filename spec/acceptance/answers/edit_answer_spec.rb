@@ -40,7 +40,7 @@ feature 'Answer editing', %q(
     scenario 'should see fixed answer after updated'  do
       click_on 'Edit answer'
 
-      save_and_open_page
+      # save_and_open_page?
 
       within '.edit_answer' do
         fill_in 'Answer', with: 'edited answer'
