@@ -17,8 +17,12 @@ feature 'Create question', '
     sign_in user
 
     visit questions_path
+
     click_on ask_question
-    create_question('Test question', 'Some problem')
+
+    fill_in 'Title', with: title
+    fill_in 'Body', with: body
+    click_on 'Create'
 
     expect(page).to have_content 'Your question was successfully created.'
   end

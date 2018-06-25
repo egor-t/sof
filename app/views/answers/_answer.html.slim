@@ -5,6 +5,12 @@
     .card.answer data-answer-id="#{answer.id}"
       p
         = answer.body
+      h5 All attachments
+      ul.question-attachments
+        - answer.attachments.each do |a|
+          li
+            = link_to a.file.identifier, a.file.url
+
       .btn-group
         - if user_signed_in? && current_user.author_of?(answer)
           = link_to 'Delete answer', question_answer_path(answer.question, answer), method: :delete, class: 'btn btn-danger'
@@ -12,6 +18,7 @@
         - if user_signed_in? && current_user.author_of?(@question)
           = link_to 'Best answer', best_answer_question_answer_path(answer.question, answer), method: :patch,
                                      remote: true, class: 'best-answer-btn btn btn-success', id: "best-answer-link-#{answer.id}"
+
       p
         = form_for [@question, answer], remote: true, data: { id: "edit-answer-#{answer.id}" } do |f|
           = f.label :body, 'Answer'

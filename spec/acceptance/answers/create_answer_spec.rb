@@ -10,15 +10,20 @@ feature 'Create answer to question', '
 
   let(:question_owner) { create(:user) }
   let(:user) { create(:user) }
-  let!(:question) { Question.create(title: 'Test1', body: 'Body1', user: question_owner) }
+  let!(:question) { Question.create(title: 'SUPER Test1', body: 'Body1', user: question_owner) }
 
   scenario 'As an authenticated user answer to question with valid data', js: true do
     sign_in user
 
     visit question_path(question)
 
-    fill_in 'Body', with: 'Perfect answer'
-    click_on 'Answer it'
+    within '#new_answer' do
+      fill_in 'Body', with: 'Perfect answer'
+      save_and_open_page
+      click_on 'Answer it'
+    end
+
+
 
     within '.answers' do
       expect(page).to have_content('Perfect answer')

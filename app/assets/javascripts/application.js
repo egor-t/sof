@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require popper
+//= require cocoon
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require_tree .

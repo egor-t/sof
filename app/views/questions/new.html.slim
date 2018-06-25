@@ -7,8 +7,18 @@
       = f.label :body
       = f.text_area :body
 
-    p Attachments:
-    = f.fields_for :attachments do |att|
-      = att.label :file
-      = att.file_field :file
+    .form-group
+      h5 Attachments
+      #files
+        = f.fields_for :attachments do |attachment|
+          .nested-fields
+            .field.file
+              p
+                = attachment.label :file
+                = attachment.file_field :file
+        .links
+          = link_to_add_association 'Add', f, :attachments, partial: 'attachments/file'
+          br
+          = link_to_remove_association 'Remove file', f
+
     = f.submit 'Create'

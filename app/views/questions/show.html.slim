@@ -13,16 +13,30 @@
         = link_to a.file.identifier, a.file.url
 hr
 
-h5 Answers
+h5 New answer
 .answers
   = form_for [@question, @answer], remote: true do |f|
+    .answer-errors
     .form-group
       = f.label :body
-      .answer-errors
       = f.text_area :body, class: 'form-control'
+    .form-group
+      p Answer attachments
+      #files
+        = f.fields_for :attachments do |attachment|
+          p
+            = attachment.label :file
+            = attachment.file_field :file
+        .links
+          = link_to_add_association 'Add', f, :attachments, partial: 'attachments/file'
+          br
+          = link_to_remove_association 'Remove file', f
+
     .form-group
       = f.submit 'Answer it', class: 'btn btn-primary'
 
   hr
+  hr
+  h5 All exist answers
   = render @question.answers.sorted_by_best_answer
 

@@ -20,6 +20,8 @@ gem 'bootstrap'
 gem 'jquery-rails'
 
 gem 'carrierwave'
+gem 'remotipart'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

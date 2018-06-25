@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = @question.answers.build
+    @answer.attachments.build
   end
 
   def new
@@ -21,7 +22,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(questions_params)
-
+    
     if @question.save
       flash[:notice] = 'Your question was successfully created.'
       redirect_to @question
@@ -50,6 +51,6 @@ class QuestionsController < ApplicationController
   end
 
   def questions_params
-    params.require(:question).permit(:title, :body, attachments_attributes: [:file])
+    params.require(:question).permit(:title, :body, attachments_attributes: [:file, :_destroy])
   end
 end
