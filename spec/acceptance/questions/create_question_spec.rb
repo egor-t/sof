@@ -18,7 +18,6 @@ feature 'Create question', '
 
     visit questions_path
     click_on ask_question
-    # Question helper
     create_question('Test question', 'Some problem')
 
     expect(page).to have_content 'Your question was successfully created.'
