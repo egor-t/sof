@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: %i[create destroy]
+  before_action :authenticate_user!
   before_action :find_question
-  before_action :find_answer, only: %i[update destroy best_answer]
+  before_action :find_answer, only: %i[update destroy best_answer like dislike]
 
   def update
     @answer = Answer.find(params[:id])
@@ -23,6 +23,14 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy if current_user.author_of?(@answer)
     redirect_to @question
+  end
+
+  def like
+    @answer.like_by(current_user)
+  end
+
+  def dislike
+    @answer.dislike_by(current_user)
   end
 
   private

@@ -19,11 +19,8 @@ feature 'Create answer to question', '
 
     within '#new_answer' do
       fill_in 'Body', with: 'Perfect answer'
-      save_and_open_page
       click_on 'Answer it'
     end
-
-
 
     within '.answers' do
       expect(page).to have_content('Perfect answer')

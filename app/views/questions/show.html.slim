@@ -3,8 +3,17 @@
 .border.border-primary
   p = @question.title
   p = @question.body
+  br
+
   - if user_signed_in? && current_user.author_of?(@question)
     = link_to 'Delete', question_path(@question), method: :delete, class: 'btn btn-primary'
+  br
+  hr
+  p#likes Likes: #{@question.get_likes.size}
+  - if user_signed_in?
+    .btn-group
+      = link_to 'Like', like_question_path(@question), method: :put, class: 'btn btn-success'
+      = link_to 'Dislike', dislike_question_path(@question), method: :put, class: 'btn btn-secondary'
 
   h4 All attachments
   ul.question-attachments

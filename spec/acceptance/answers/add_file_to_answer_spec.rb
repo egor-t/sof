@@ -25,9 +25,6 @@ feature 'Add files to answer', '
         click_on 'Answer it'
       end
 
-      save_and_open_page
-
-
       within '.answers' do
         expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
       end
