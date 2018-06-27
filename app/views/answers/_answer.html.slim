@@ -6,11 +6,14 @@
       p
         = answer.body
       hr
-      p#likes Likes: #{answer.get_likes.size}
-      p#dislikes Dislikes: #{answer.get_dislikes.size}
+      h5.card-title
+        span= 'Likes: '
+        span.likes
+          = answer.get_likes.size
+
       .btn-group
         - if user_signed_in?
-          = link_to 'Like', like_question_answer_path(answer.question, answer), method: :put, class: 'btn btn-success'
+          = link_to 'Like', like_question_answer_path(answer.question, answer), method: :put, remote: true, class: 'btn btn-success like-answer'
           = link_to 'Dislike', dislike_question_answer_path(answer.question, answer), method: :put, class: 'btn btn-secondary'
       br
       h5 All attachments

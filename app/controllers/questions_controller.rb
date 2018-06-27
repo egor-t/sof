@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  include Votable
   before_action :authenticate_user!, except: %i[index show]
   before_action :load_question, only: %i[show edit update destroy like dislike]
 
@@ -42,15 +43,6 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy if current_user.author_of?(@question)
     redirect_to questions_path
-  end
-
-  def like
-
-    @question.like_by(current_user)
-  end
-
-  def dislike
-    @question.dislike_by(current_user)
   end
 
   private

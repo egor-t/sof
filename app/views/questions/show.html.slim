@@ -9,11 +9,15 @@
     = link_to 'Delete', question_path(@question), method: :delete, class: 'btn btn-primary'
   br
   hr
-  p#likes Likes: #{@question.get_likes.size}
+  h5.card-title
+    span= 'Likes: '
+    span.likes
+      = @question.get_likes.size
+
   - if user_signed_in?
     .btn-group
-      = link_to 'Like', like_question_path(@question), method: :put, class: 'btn btn-success'
-      = link_to 'Dislike', dislike_question_path(@question), method: :put, class: 'btn btn-secondary'
+      = link_to 'Like', like_question_path(@question), method: :put,  remote: true, class: 'btn btn-success like-question'
+      = link_to 'Dislike', dislike_question_path(@question), method: :put,  remote: true, class: 'btn btn-secondary'
 
   h4 All attachments
   ul.question-attachments
