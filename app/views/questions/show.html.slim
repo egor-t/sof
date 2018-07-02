@@ -11,7 +11,7 @@
   hr
   h5.card-title
     span= 'Likes: '
-    span.likes
+    span.question-likes
       = @question.get_likes.size
 
   - if user_signed_in?

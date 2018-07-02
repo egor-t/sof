@@ -14,7 +14,7 @@
       .btn-group
         - if user_signed_in?
           = link_to 'Like', like_question_answer_path(answer.question, answer), method: :put, remote: true, class: 'btn btn-success like-answer'
-          = link_to 'Dislike', dislike_question_answer_path(answer.question, answer), method: :put, class: 'btn btn-secondary'
+          / = link_to 'Dislike', dislike_question_answer_path(answer.question, answer), method: :put, class: 'btn btn-secondary'
       br
       h5 All attachments
       ul.question-attachments
