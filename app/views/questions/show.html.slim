@@ -25,7 +25,17 @@
       li
         = link_to a.file.identifier, a.file.url
 hr
+.border.question-comments
+  = render partial: 'comments/comments', locals: { commentable: @question }
 
+br
+- if user_signed_in?
+  .border.question-comment-form
+    = render partial: 'comments/form', locals: { commentable: @question }
+
+
+
+hr
 h5 New answer
 .answers
   = form_for [@question, @answer], remote: true do |f|

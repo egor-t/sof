@@ -1,0 +1,4 @@
+li
+  strong=@comment.user_email
+  p= @comment.body
+  hr

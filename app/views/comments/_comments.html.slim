@@ -1,0 +1,7 @@
+h5  #{commentable.class} comments
+ul
+  - commentable.comments.each do |comment|
+    li
+      strong=comment.user.email
+      p= comment.body
+      hr

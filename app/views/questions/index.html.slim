@@ -1,4 +1,9 @@
-h1 Questions
-= render @questions
+h3 Questions
+.questions-list.collection
+  - if @questions.any?
+    = render @questions
+  - else
+    div
+      .col.s6.offset-s3.center No questions found.
 
 = link_to 'Ask question', new_question_path

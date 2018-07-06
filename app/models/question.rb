@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
+  include Commentable
   has_many :answers, dependent: :destroy
   has_many :attachments, as: :attachable
   belongs_to :user

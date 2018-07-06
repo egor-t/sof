@@ -1,8 +1,9 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   devise_for :users
+
   resources :questions do
+    resources :comments, module: :questions
+
     member do
       put 'like', to: 'questions#like'
       put 'dislike', to: 'questions#dislike'
@@ -17,7 +18,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :answers do
+    resources :comments, module: :answers
+  end
+
+
   resources :attachments, only: [:destroy]
 
   root 'questions#index'
+
+  mount ActionCable.server => '/cable'
 end
