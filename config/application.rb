@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Sof
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     config.load_defaults 5.2
     config.action_cable.disable_request_forgery_protection = false
 

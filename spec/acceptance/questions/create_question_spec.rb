@@ -24,7 +24,7 @@ feature 'Create question', '
     fill_in 'Body', with: body
     click_on 'Create'
 
-    expect(page).to have_content 'Your question was successfully created.'
+    expect(page).to have_content 'Question was successfully created.'
   end
 
   scenario 'Non-authenticated user try to create question' do
@@ -49,7 +49,7 @@ feature 'Create question', '
         click_on ask_question
         create_question 'New question', 'New body'
 
-        expect(page).to have_content 'Your question was successfully created.'
+        expect(page).to have_content 'Question was successfully created.'
       end
 
       Capybara.using_session('guest') do

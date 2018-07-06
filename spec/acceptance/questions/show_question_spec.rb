@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'acceptance/acceptance_helper'
 
 feature 'Show question', '
@@ -12,7 +10,7 @@ feature 'Show question', '
   let!(:question1) { Question.create(title: 'Test1', body: 'Body1', user: user) }
 
   scenario 'As user get exist question' do
-    visit questions_path(question1)
+    visit question_path(question1)
 
     expect(page).to have_content('Test1')
     expect(page).to have_content('Body1')

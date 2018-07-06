@@ -4,48 +4,37 @@ class QuestionsController < ApplicationController
   include Votable
   before_action :authenticate_user!, except: %i[index show]
   before_action :load_question, only: %i[show edit update destroy like dislike]
+  before_action :build_answer, only: :show
 
   after_action :publish_question, only: [:create]
 
+  respond_to :html
+
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def show
-    @answer = @question.answers.build
-    @answer.attachments.build
+    respond_with @question
   end
 
   def new
-    @question = Question.new
-    @question.attachments.build
-
+    respond_with(@question = Question.new)
   end
 
   def edit; end
 
   def create
-    @question = current_user.questions.new(questions_params)
-    
-    if @question.save
-      flash[:notice] = 'Your question was successfully created.'
-      redirect_to @question
-    else
-      render :new
-    end
+    respond_with(@question = current_user.questions.create(questions_params))
   end
 
   def update
-    if @question.update(questions_params)
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question.update(questions_params) if current_user.author_of?(@question)
+    respond_with @question
   end
 
   def destroy
-    @question.destroy if current_user.author_of?(@question)
-    redirect_to questions_path
+    respond_with(@question.destroy) if current_user.author_of?(@question)
   end
 
   private
@@ -59,6 +48,10 @@ class QuestionsController < ApplicationController
             locals: { question: @question }
         )
     )
+  end
+
+  def build_answer
+    @answer = @question.answers.build
   end
 
   def load_question

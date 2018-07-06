@@ -26,6 +26,7 @@ gem 'acts_as_votable'
 
 gem 'skim'
 gem 'gon'
+gem 'responders'
 
 
 group :development, :test do

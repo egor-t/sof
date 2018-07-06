@@ -10,7 +10,7 @@
     .form-group
       h5 Attachments
       #files
-        = f.fields_for :attachments do |attachment|
+        = f.fields_for :attachments, @question.attachments.build do |attachment|
           .nested-fields
             .field.file
               p

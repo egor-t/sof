@@ -20,7 +20,7 @@ feature 'Add files to question', '
     it 'should create question with file' do
       create_question('Test question', 'Some problem', file_path)
 
-      expect(page).to have_content 'Your question was successfully created.'
+      expect(page).to have_content 'Question was successfully created.'
       expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
     end
   end

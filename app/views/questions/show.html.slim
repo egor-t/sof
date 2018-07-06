@@ -46,7 +46,7 @@ h5 New answer
     .form-group
       p Answer attachments
       #files
-        = f.fields_for :attachments do |attachment|
+        = f.fields_for :attachments, @answer.attachments.build do |attachment|
           p
             = attachment.label :file
             = attachment.file_field :file
