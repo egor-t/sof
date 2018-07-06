@@ -6,6 +6,8 @@ class AnswersController < ApplicationController
   before_action :find_question
   before_action :find_answer, only: %i[update destroy best_answer like dislike]
 
+  after_action :publish_answer, only: [:create]
+
   def update
     @answer = Answer.find(params[:id])
     @answer.update(answer_params)
@@ -27,6 +29,14 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def publish_answer
+    return if @answer.errors.any?
+    ActionCable.server.broadcast(
+        "questions/#{@answer.question_id}/answers",
+        answer: @answer.as_json(include: :attachments).merge({likes: @answer.get_likes.size}).to_json
+    )
+  end
 
   def find_question
     @question = Question.find(params[:question_id])

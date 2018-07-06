@@ -22,7 +22,7 @@ feature 'Make favorite answer for question', '
         click_on 'Best answer'
       end
 
-      within '.block' do
+      within '.answer' do
         expect(page).to have_content('That is the best answer')
       end
     end

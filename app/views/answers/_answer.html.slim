@@ -1,8 +1,8 @@
 - if answer.persisted?
   br
   .block
-    = 'That is the best answer' if answer.best_answer?
     .card.answer data-answer-id="#{answer.id}"
+      = 'That is the best answer' if answer.best_answer?
       p
         = answer.body
       hr
@@ -14,7 +14,6 @@
       .btn-group
         - if user_signed_in?
           = link_to 'Like', like_question_answer_path(answer.question, answer), method: :put, remote: true, class: 'btn btn-success like-answer'
-          = link_to 'Dislike', dislike_question_answer_path(answer.question, answer), method: :put, class: 'btn btn-secondary'
       br
       h5 All attachments
       ul.question-attachments
@@ -36,6 +35,12 @@
           .answer-errors
           = f.text_area :body
           = f.submit 'Save answer', class: 'btn'
+  hr
+  .border.answer-comments
+    = render partial: 'comments/comments', locals: {commentable: answer}
+  - if user_signed_in?
+    .border.answer-comments-form
+      = render partial: 'comments/form', locals: { commentable: answer }
 
 
 
