@@ -1,10 +1,10 @@
 $(document).ready ->
   $('.new_comment').bind('ajax:success', (e, data, status, xhr) ->
+    comment_id = data.commentable_id
     if data.commentable_type == 'Question'
       $('.question-comments ul').append JST['templates/comment'](comment: data)
     else
-
-      $('.answer-comments ul').append JST['templates/comment'](comment: data)
+      $('#answer_' + comment_id + ' .answer-comments ul').append JST['templates/comment'](comment: data)
 
     $('.new_comment textarea').val('')
   )
@@ -12,10 +12,8 @@ $(document).ready ->
   App.cable.subscriptions.create { channel: 'CommentsChannel' },
     connected: ->
       @perform 'follow'
-      console.log '1 - connected'
       return
     received: (data) ->
-      console.log '2 - received'
       current_user_id = $('.user').data('currentUserId')
       comment = JSON.parse(data['comment'])
       type = comment.commentable_type
@@ -26,6 +24,6 @@ $(document).ready ->
           when 'Question'
             $('.question-comments ul').append JST['templates/comment'](comment: comment)
           when 'Answer'
-            $('.answer-comments ul').append JST['templates/comment'](comment: comment)
+            $('#answer_' + comment_id + ' .answer-comments ul').append JST['templates/comment'](comment: comment)
       return
   return

@@ -1,7 +1,7 @@
 - if answer.persisted?
   br
   .block
-    .card.answer data-answer-id="#{answer.id}"
+    .card.answer data-answer-id="#{answer.id}" id=dom_id(answer)
       = 'That is the best answer' if answer.best_answer?
       p
         = answer.body
@@ -35,12 +35,12 @@
           .answer-errors
           = f.text_area :body
           = f.submit 'Save answer', class: 'btn'
-  hr
-  .border.answer-comments
-    = render partial: 'comments/comments', locals: {commentable: answer}
-  - if user_signed_in?
-    .border.answer-comments-form
-      = render partial: 'comments/form', locals: { commentable: answer }
+      hr
+      .border.answer-comments
+        = render partial: 'comments/comments', locals: {commentable: answer}
+      - if user_signed_in?
+        .border.answer-comments-form
+          = render partial: 'comments/form', locals: { commentable: answer }
 
 
 
