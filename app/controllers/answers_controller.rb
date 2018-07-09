@@ -8,8 +8,9 @@ class AnswersController < ApplicationController
 
   after_action :publish_answer, only: [:create]
 
+  respond_to :js
+
   def update
-    @answer = Answer.find(params[:id])
     @answer.update(answer_params)
   end
 
