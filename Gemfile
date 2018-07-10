@@ -27,12 +27,16 @@ gem 'acts_as_votable'
 gem 'skim'
 gem 'gon'
 gem 'responders'
-
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'capybara-email'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
@@ -46,6 +50,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  gem 'letter_opener'
 end
 
 group :test do
