@@ -31,6 +31,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'cancancan'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

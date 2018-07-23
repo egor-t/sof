@@ -1,17 +1,18 @@
 module Votable
   extend ActiveSupport::Concern
 
-
   included do
     before_action :set_votable, only: [:like, :dislike]
     before_action :can_vote?, only: [:like, :dislike]
   end
 
   def like
-    @votable.like_by(current_user)
-
     respond_to do |format|
-      format.json { render json: { data: @votable.get_likes.size }  }
+      if @votable.like_by(current_user)
+        format.json { render json: { data: @votable.get_likes.size }  }
+      else
+        format.json { render json: @vote.errors.messages.values, status: :unprocessable_entity }
+      end
     end
   end
 

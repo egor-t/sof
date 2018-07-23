@@ -12,7 +12,7 @@
           = answer.get_likes.size
 
       .btn-group
-        - if user_signed_in?
+        - if can?(:like, answer)
           = link_to 'Like', like_question_answer_path(answer.question, answer), method: :put, remote: true, class: 'btn btn-success like-answer'
 
       br
@@ -23,12 +23,14 @@
             = link_to a.file.identifier, a.file.url
 
       .btn-group
-        - if user_signed_in? && current_user.author_of?(answer)
-          = link_to 'Delete answer', question_answer_path(answer.question, answer), method: :delete, class: 'btn btn-danger'
-          = link_to 'Edit answer', '', class: 'edit-answer-link btn btn-warning', data: { answer_id: answer.id }
-        - if user_signed_in? && current_user.author_of?(@question)
-          = link_to 'Best answer', best_answer_question_answer_path(answer.question, answer), method: :patch,
-                                     remote: true, class: 'best-answer-btn btn btn-success', id: "best-answer-link-#{answer.id}"
+        - if user_signed_in? 
+          - if can?(:destroy, answer)
+            = link_to 'Delete answer', question_answer_path(answer.question, answer), method: :delete, class: 'btn btn-danger'
+          - if can?(:edit, answer)
+            = link_to 'Edit answer', '', class: 'edit-answer-link btn btn-warning', data: { answer_id: answer.id }
+          -if can?(:best_answer, answer)
+            = link_to 'Best answer', best_answer_question_answer_path(answer.question, answer), method: :patch,
+                                    remote: true, class: 'best-answer-btn btn btn-success', id: "best-answer-link-#{answer.id}"
 
       p
         = form_for [@question, answer], remote: true, data: { id: "edit-answer-#{answer.id}" } do |f|

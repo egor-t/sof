@@ -29,9 +29,8 @@ feature 'Create question', '
 
   scenario 'Non-authenticated user try to create question' do
     visit questions_path
-    click_on ask_question
 
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
+    expect(page).not_to have_content 'Ask question'
   end
 
   context 'multiple sessions' do

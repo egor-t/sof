@@ -9,6 +9,7 @@ class AnswersController < ApplicationController
   after_action :publish_answer, only: [:create]
 
   respond_to :js
+  authorize_resource
 
   def update
     @answer.update(answer_params)

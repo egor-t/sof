@@ -5,5 +5,5 @@ h3 Questions
   - else
     div
       .col.s6.offset-s3.center No questions found.
-
-= link_to 'Ask question', new_question_path
+- if can?(:create, Question)
+  = link_to 'Ask question', new_question_path
