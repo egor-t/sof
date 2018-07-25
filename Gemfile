@@ -33,6 +33,8 @@ gem 'omniauth-twitter'
 gem 'omniauth-github'
 gem 'cancancan'
 gem 'doorkeeper'
+gem 'oj'
+gem 'oj_mimic_json'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

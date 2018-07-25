@@ -1,5 +1,4 @@
 class Api::V1::ProfilesController < ApplicationController
-  # doorkeeper_for :all
   before_action :doorkeeper_authorize!
 
   skip_authorization_check
