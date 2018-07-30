@@ -1,19 +1,7 @@
 require 'rails_helper.rb'
 
 describe 'Question API' do
-  context 'anuthorized' do
-    it 'returns 401 if request without access token' do
-      get '/api/v1/questions', params: { format: :json }
-
-      expect(response.status).to eq 401
-    end
-
-    it 'returns if access token not valid' do
-      get '/api/v1/questions', params: { format: :json, access_token: '1234' }
-
-      expect(response.status).to eq 401
-    end
-  end
+  it_behaves_like 'API Authenticable'
 
   describe 'GET /index' do
     context 'authorized' do
@@ -127,5 +115,9 @@ describe 'Question API' do
     it 'should save question to db' do
       expect { post '/api/v1/questions', params: { format: :json, access_token: access_token.token, question: { title: 'Question', body: 'body_of_question'} }}.to change(Question, :count).by(1)
     end
+  end
+
+  def do_request(options = {})
+    get '/api/v1/questions', params: { format: :json }.merge(options)
   end
 end

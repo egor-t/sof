@@ -18,7 +18,6 @@ feature 'Make favorite answer for question', '
       sign_in owner_question
       visit question_path(question)
 
-      save_and_open_page
       within '.answers' do
         click_on 'Best answer'
       end
@@ -27,13 +26,6 @@ feature 'Make favorite answer for question', '
         expect(page).to have_content('That is the best answer')
       end
     end
-
-    # it 'only owner should see the button - best answer' do
-    #   sign_in user
-    #   visit question_path(question)
-
-    #   expect(page).not_to have_content('Best answer')
-    # end
   end
 
   describe 'As non-authenticated user' do

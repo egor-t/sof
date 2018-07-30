@@ -3,18 +3,8 @@ require 'rails_helper.rb'
 describe 'Profile API' do
   let(:me) { create(:user) }
 
-  describe 'GET /me' do 
-    context 'unauthorized' do
-      it 'return 401 status if the is no access token' do 
-        get '/api/v1/profiles/me', params: { format: :json }
-        expect(response.status).to eq 401
-      end
-
-      it 'return 401 status if the is invalid acsess token' do 
-        get '/api/v1/profiles/me', params: { format: :json, access_token: '1234' }
-        expect(response.status).to eq 401
-      end
-    end
+  describe 'GET /me' do
+    it_behaves_like 'API Authenticable'
 
     context 'authorized' do
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
@@ -42,17 +32,17 @@ describe 'Profile API' do
 
     describe 'GET /users' do
       context 'unauthorized' do
-        it 'return 401 status if the is no access token' do 
+        it 'return 401 status if the is no access token' do
           get '/api/v1/profiles', params: { format: :json }
           expect(response.status).to eq 401
         end
-  
-        it 'return 401 status if the is invalid acsess token' do 
+
+        it 'return 401 status if the is invalid acsess token' do
           get '/api/v1/profiles', params: { format: :json, access_token: '1234' }
           expect(response.status).to eq 401
         end
       end
-      
+
       context 'authorized' do
         let!(:users) { create_list(:user, 2) }
         let(:access_token) { create(:access_token, resource_owner_id: me.id) }
@@ -63,6 +53,10 @@ describe 'Profile API' do
           expect(response.body).to eq(users.to_json)
         end
       end
+    end
+
+    def do_request(options = {})
+      get '/api/v1/profiles/me', params: { format: :json }.merge(options)
     end
   end
 end
