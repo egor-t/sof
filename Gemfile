@@ -35,6 +35,7 @@ gem 'cancancan'
 gem 'doorkeeper'
 gem 'oj'
 gem 'oj_mimic_json'
+gem 'active_model_serializers', '~> 0.10.7'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

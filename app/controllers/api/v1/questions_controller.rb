@@ -5,14 +5,11 @@ class Api::V1::QuestionsController < Api::V1::BaseController
 
   def index
     @questions = Question.all
-    respond_with @questions.to_json(include: :answers)
+    respond_with @questions
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.user = current_resource_owner
-    @question.save
-    respond_with @question
+    respond_with(@question = current_resource_owner.questions.create(question_params))
   end
 
   def show

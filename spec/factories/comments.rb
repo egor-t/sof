@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :comment do
-    body "MyString"
+    user
+    body 'Comment'
+    association :commentable, factory: :question
   end
 end
