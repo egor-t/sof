@@ -27,3 +27,6 @@
 /config/master.key
 /config/database.yml
 .idea/
+dumb.rdb
+config/*.sphinx.conf
+db/sphinx

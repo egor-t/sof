@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resource :subscriptions, only: [:create, :destroy]
 
   root 'questions#index'
+  get '/search', to: 'search#index', as: 'search'
 
   mount ActionCable.server => '/cable'
 

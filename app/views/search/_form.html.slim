@@ -1,0 +1,8 @@
+.custom_container.border
+  = form_tag("/search", method: "get") do
+    = select_tag :object_type, options_for_select([['Question', 'Question'],
+                                                  ['Answer', 'Answer'], ['Comment', 'Comment'],
+                                                  ['User', 'User'], ['All', 'ThinkingSphinx']])
+    = label_tag(:query, "Search for:")
+    = text_field_tag(:query)
+    = submit_tag("Search")

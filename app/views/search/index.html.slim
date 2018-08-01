@@ -1,0 +1,13 @@
+= render 'search/form'
+.row
+  - if @search_result
+    .items
+      - @search_result.each do |data|
+        .block.bg-light
+          h5 About #{data.class}
+          p = data.try(:title)
+          p = data.try(:body)
+          p = data.try(:username)
+          br
+  - else
+    p Any results

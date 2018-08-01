@@ -66,7 +66,6 @@ RSpec.describe AnswersController, type: :controller do
 
       xit 'should update exist answer in database' do
         patch :update, params: { id: answer, question_id: question, answer: { body: 'NEW BODY' }, format: :js }
-        binding.pry
         answer.reload
         expect(answer.body).to eq 'NEW BODY'
       end

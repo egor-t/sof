@@ -41,6 +41,10 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
 
+gem 'mysql2', :platform => :ruby
+gem 'jdbc-mysql', :platform => :jruby
+gem 'thinking-sphinx'
+
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'

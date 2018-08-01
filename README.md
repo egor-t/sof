@@ -1,24 +1,4 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Before start rspec spec:
+  note: for search need use some configuration
+  make that: RAILS_ENV=test bundle exec rake ts:index & RAILS_ENV=test bundle exec rake ts:start
+  than run: rspec spec
