@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: trueDailyMailer
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
@@ -10,6 +10,9 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'support/factory_bot'
 require 'cancan/matchers'
+require 'sidekiq/testing'
+
+Sidekiq::Testing.fake!
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 

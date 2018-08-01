@@ -3,6 +3,12 @@
 .border.border-primary
   p = @question.title
   p = @question.body
+  - if user_signed_in?
+    - if current_user.subscribed_for_question?(@question)
+      = link_to 'Unsubscribe', subscriptions_path(id: current_user.subscribtion_for_question(@question)), method: :delete, class: 'btn btn-secondary'
+    - else
+      = link_to 'Subscribe', subscriptions_path(question_id: @question), method: :post, class: 'btn btn-success'
+
   br
 
   - if can?(:destroy, @question)
@@ -63,4 +69,3 @@ h5 New answer
   hr
   h5 All exist answers
   = render @question.answers.sorted_by_best_answer
-

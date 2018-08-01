@@ -5,6 +5,8 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :attachments, as: :attachable
   belongs_to :user
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscribers, through: :subscriptions, source: :user
 
   validates :title, :body, presence: true
 

@@ -16,7 +16,20 @@ class Answer < ApplicationRecord
 
   scope :sorted_by_best_answer, -> { order(best_answer: :desc) }
 
+  after_create :send_email_to_question_author, if: Proc.new { self.question.user.subscribed_for_question?(self.question) }
+  after_create :send_email_to_question_subscribers
+
   def set_all_answers_not_best!
     Answer.update_all(best_answer: false)
+  end
+
+  protected
+
+  def send_email_to_question_author
+    NewAnswerJob.perform_later(self)
+  end
+
+  def send_email_to_question_subscribers
+    SubscribedQuestionJob.perform_later(self)
   end
 end
