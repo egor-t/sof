@@ -7,9 +7,10 @@ set :deploy_user, "deployer"
 set :use_sudo, true
 
 set :rails_env, 'production'
+set :rvm_ruby_version, '2.5.1'
 
-append :linked_files, "config/database.yml"
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_files, "config/database.yml config/master.key"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system, public/uploads"
 
 namespace :deploy do
   desc 'Restart application'
