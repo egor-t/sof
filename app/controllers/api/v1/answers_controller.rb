@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::V1::AnswersController < Api::V1::BaseController
-  before_action :set_question, only: [:index, :create]
+  before_action :set_question, only: %i[index create]
   before_action :set_answer, only: :show
 
   skip_authorization_check

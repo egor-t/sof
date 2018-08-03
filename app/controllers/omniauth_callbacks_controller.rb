@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :set_user
 
@@ -9,11 +11,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def github
-    if @user && @user.persisted?
+    if @user&.persisted?
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: 'GitHub') if is_navigational_format?
     end
   end
+
   private
 
   def set_user

@@ -43,7 +43,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'should assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
-      end
+    end
 
     it 'should render new view' do
       expect(response).to render_template :new

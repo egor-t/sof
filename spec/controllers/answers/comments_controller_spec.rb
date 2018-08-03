@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Answers::CommentsController, type: :controller do
-
   describe '#POST create' do
     let(:user) { create(:user) }
     before { sign_in user }
@@ -11,11 +12,12 @@ RSpec.describe Answers::CommentsController, type: :controller do
     let(:create_response) { JSON.parse(response.body) }
 
     context 'with valid attributes' do
-      let(:valid_create_request) { post :create,
-                                        params: { answer_id: answer.id, comment: { body: 'New comment' }, format: :json }
-      }
+      let(:valid_create_request) do
+        post :create,
+             params: { answer_id: answer.id, comment: { body: 'New comment' }, format: :json }
+      end
 
-      it 'should return status OK' , js: true do
+      it 'should return status OK', js: true do
         valid_create_request
         expect(response).to have_http_status :ok
       end
@@ -31,9 +33,10 @@ RSpec.describe Answers::CommentsController, type: :controller do
     end
 
     context 'with invalid attributes' do
-      let(:invalid_create_request) { post :create,
-                                          params: { answer_id: answer.id, comment: { body: '' }, format: :json }
-      }
+      let(:invalid_create_request) do
+        post :create,
+             params: { answer_id: answer.id, comment: { body: '' }, format: :json }
+      end
 
       it 'return status unprocessable_entity and code 422' do
         invalid_create_request
@@ -45,5 +48,4 @@ RSpec.describe Answers::CommentsController, type: :controller do
       end
     end
   end
-
 end

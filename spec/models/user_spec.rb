@@ -29,7 +29,6 @@ RSpec.describe User, type: :model do
     let!(:user) { create(:user) }
     let(:auth) { OmniAuth::AuthHash.new(provider: 'Facebook', uid: '123456') }
 
-
     context 'User already has authorization' do
       it 'should return exist user' do
         user.authorizations.create(provider: 'Facebook', uid: '123456')
@@ -46,9 +45,8 @@ RSpec.describe User, type: :model do
         end
 
         it 'creates authorization for user' do
-          expect{ User.find_for_oauth(auth) }.to change(user.authorizations, :count).by(1)
+          expect { User.find_for_oauth(auth) }.to change(user.authorizations, :count).by(1)
         end
-
 
         it 'create authorization with provider and uid' do
           authorization = User.find_for_oauth(auth).authorizations.first
@@ -62,11 +60,8 @@ RSpec.describe User, type: :model do
         end
       end
 
-
-
       context 'user does not exist' do
         let!(:auth) { OmniAuth::AuthHash.new(provider: 'github', uid: '123456', info: { email: 'new@user.com' }) }
-
 
         it 'create new user' do
           expect { User.find_for_oauth(auth) }.to change(User, :count).by(1)

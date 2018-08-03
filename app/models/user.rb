@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :github]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: %i[facebook github]
 
   has_many :answers, dependent: :destroy
   has_many :questions, dependent: :destroy
@@ -23,7 +24,7 @@ class User < ApplicationRecord
       user.create_authorizations(auth)
     else
       password = Devise.friendly_token[0, 20]
-      email = email ? email : "zzzzz-#{auth.uid}@#{auth.provider}.com"
+      email ||= "zzzzz-#{auth.uid}@#{auth.provider}.com"
       user = User.create!(email: email, password: password, password_confirmation: password)
       user.create_authorizations(auth)
     end
@@ -39,6 +40,6 @@ class User < ApplicationRecord
   end
 
   def subscribtion_for_question(question)
-    self.subscriptions.where(question_id: question).first
+    subscriptions.where(question_id: question).first
   end
 end

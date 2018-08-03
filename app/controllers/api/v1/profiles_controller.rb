@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::ProfilesController < ApplicationController
   before_action :doorkeeper_authorize!
 
@@ -10,7 +12,7 @@ class Api::V1::ProfilesController < ApplicationController
   end
 
   def index
-    respond_with(@profiles = User.where.not(id: current_resource_owner.id))  if doorkeeper_token
+    respond_with(@profiles = User.where.not(id: current_resource_owner.id)) if doorkeeper_token
   end
 
   protected

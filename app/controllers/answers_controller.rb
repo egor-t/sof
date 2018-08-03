@@ -35,8 +35,8 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
     ActionCable.server.broadcast(
-        "questions/#{@answer.question_id}/answers",
-        answer: @answer.as_json(include: :attachments).merge({likes: @answer.get_likes.size}).to_json
+      "questions/#{@answer.question_id}/answers",
+      answer: @answer.as_json(include: :attachments).merge(likes: @answer.get_likes.size).to_json
     )
   end
 
@@ -49,6 +49,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, attachments_attributes: [:file, :_destroy])
+    params.require(:answer).permit(:body, attachments_attributes: %i[file _destroy])
   end
 end

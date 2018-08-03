@@ -48,10 +48,8 @@ feature 'Create answer to question', '
     expect(current_path).to eq new_user_session_path
   end
 
-
   context 'multiple sessions' do
     scenario "answers appears on another user's page", js: true do
-
       Capybara.using_session('user') do
         sign_in user
         visit question_path(question)
@@ -62,7 +60,6 @@ feature 'Create answer to question', '
       end
 
       Capybara.using_session('user') do
-
         fill_in 'Body', with: 'New answer here'
         click_on 'Answer it'
 
@@ -72,7 +69,6 @@ feature 'Create answer to question', '
       Capybara.using_session('guest') do
         expect(page).to have_content 'New answer here'
       end
-
     end
   end
 end

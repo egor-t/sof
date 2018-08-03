@@ -19,37 +19,37 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap'
 gem 'jquery-rails'
 
-gem 'carrierwave'
-gem 'remotipart'
-gem 'cocoon'
 gem 'acts_as_votable'
+gem 'carrierwave'
+gem 'cocoon'
+gem 'remotipart'
 
-gem 'skim'
-gem 'gon'
-gem 'responders'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-github'
+gem 'active_model_serializers', '~> 0.10.7'
 gem 'cancancan'
 gem 'doorkeeper'
+gem 'gon'
 gem 'oj'
 gem 'oj_mimic_json'
-gem 'active_model_serializers', '~> 0.10.7'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+gem 'omniauth-twitter'
+gem 'responders'
+gem 'skim'
 
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
 
-gem 'mysql2', :platform => :ruby
-gem 'jdbc-mysql', :platform => :jruby
+gem 'jdbc-mysql', platform: :jruby
+gem 'mysql2', platform: :ruby
 gem 'thinking-sphinx'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'capybara-email'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
@@ -59,19 +59,23 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
-  gem 'letter_opener'
 end
 
 group :test do
   # gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'json_spec'
   gem 'launchy'
   gem 'shoulda-matchers', require: false
-  gem 'json_spec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

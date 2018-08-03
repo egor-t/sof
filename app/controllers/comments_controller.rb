@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   after_action :publish_comment, only: [:create]
@@ -9,7 +11,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        format.json { render json: @comment.attributes.merge({ user_email: @comment.user.email }).to_json }
+        format.json { render json: @comment.attributes.merge(user_email: @comment.user.email).to_json }
       else
         format.json { render json: @comment.errors.full_messages, status: :unprocessable_entity }
       end
@@ -20,8 +22,8 @@ class CommentsController < ApplicationController
 
   def publish_comment
     ActionCable.server.broadcast(
-        'comments',
-        comment: @comment.attributes.merge({ user_email: @comment.user.email }).to_json
+      'comments',
+      comment: @comment.attributes.merge(user_email: @comment.user.email).to_json
     )
   end
 

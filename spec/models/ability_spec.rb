@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Ability do
@@ -25,7 +27,7 @@ describe Ability do
 
     context 'Question' do
       it { should be_able_to :create, Question }
-      it { should be_able_to :update, question , user: user }
+      it { should be_able_to :update, question, user: user }
       it { should_not be_able_to :update, second_question, user: user }
 
       it { should be_able_to :like, second_question, user: user }
@@ -39,10 +41,10 @@ describe Ability do
     context 'Answer' do
       it { should be_able_to :destroy, answer, user: user }
       it { should_not be_able_to :destroy, other_answer, user: user }
-  
+
       it { should be_able_to :best_answer, answer, user: user }
       it { should_not be_able_to :best_answer, other_answer, user: user }
-  
+
       it { should be_able_to :like, other_answer, user: user }
       it { should be_able_to :dislike, other_answer, user: user }
     end

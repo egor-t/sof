@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper.rb'
 
 describe 'Question API' do
@@ -21,7 +23,7 @@ describe 'Question API' do
         expect(response.body).to have_json_size(2)
       end
 
-      %w(id body created_at updated_at).each do |attr|
+      %w[id body created_at updated_at].each do |attr|
         it "answer object contains #{attr}" do
           expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path("0/#{attr}")
         end
@@ -43,18 +45,18 @@ describe 'Question API' do
         expect(response).to be_success
       end
 
-      %w(id body created_at updated_at).each do |attr|
+      %w[id body created_at updated_at].each do |attr|
         it "contains #{attr}" do
-          expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path("#{attr}")
+          expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path(attr.to_s)
         end
       end
 
       context 'comments' do
         it 'included in answer object' do
-          expect(response.body).to have_json_size(1).at_path("comments")
+          expect(response.body).to have_json_size(1).at_path('comments')
         end
 
-        %w(id body created_at updated_at).each do |attr|
+        %w[id body created_at updated_at].each do |attr|
           it "comments object contains #{attr}" do
             expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("comments/0/#{attr}")
           end
@@ -63,11 +65,11 @@ describe 'Question API' do
 
       context 'files' do
         it 'included in answer object' do
-          expect(response.body).to have_json_size(1).at_path("attachments")
+          expect(response.body).to have_json_size(1).at_path('attachments')
         end
 
-        it "attachment object contains file" do
-           expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path("attachments/0/file")
+        it 'attachment object contains file' do
+          expect(response.body).to be_json_eql(attachment.file.url.to_json).at_path('attachments/0/file')
         end
       end
     end
@@ -84,14 +86,14 @@ describe 'Question API' do
       expect(response).to be_successful
     end
 
-    %w(body user_id).each do |attr|
+    %w[body user_id].each do |attr|
       it "answer object contains #{attr}" do
-        expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path("#{attr}")
+        expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path(attr.to_s)
       end
     end
 
     it 'should save question to db' do
-      expect { post '/api/v1/answers', params: { format: :json, access_token: access_token.token, id: question.id, answer: { body: answer.body } }}.to change(Answer, :count).by(1)
+      expect { post '/api/v1/answers', params: { format: :json, access_token: access_token.token, id: question.id, answer: { body: answer.body } } }.to change(Answer, :count).by(1)
     end
   end
 

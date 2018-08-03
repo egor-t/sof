@@ -54,7 +54,6 @@ feature 'Create question', '
       Capybara.using_session('guest') do
         expect(page).to have_content 'New question'
       end
-
     end
   end
 end

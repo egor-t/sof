@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require_relative '../acceptance_helper'
 
-feature 'Add comment to answer', %q{
+feature 'Add comment to answer', '
   In order to ask questions about problem
   As an authenticate user
   I want to be able comment it
-} do
+' do
 
   given(:user) { create(:user) }
   given!(:question) { create(:question) }

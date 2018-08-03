@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'API Authenticable' do
   context 'anuthorized' do
     it 'returns 401 if request without access token' do

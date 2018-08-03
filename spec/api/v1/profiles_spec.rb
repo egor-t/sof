@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper.rb'
 
 describe 'Profile API' do
@@ -23,7 +25,7 @@ describe 'Profile API' do
         expect(response.body).to be_json_eql(me.id.to_json).at_path('id')
       end
 
-      %w(password encrypted_password).each do |attr|
+      %w[password encrypted_password].each do |attr|
         it "does not contain #{attr}" do
           expect(response.body).to_not have_json_path(attr)
         end

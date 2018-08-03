@@ -10,7 +10,6 @@ class Question < ApplicationRecord
 
   validates :title, :body, presence: true
 
-
   accepts_nested_attributes_for :attachments
   acts_as_votable
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionMailer < ApplicationMailer
   def notify_question_owner(answer)
     @question = answer.question
