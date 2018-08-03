@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.4.2'
+ruby '2.5.2'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
@@ -44,6 +44,7 @@ gem 'whenever', require: false
 gem 'jdbc-mysql', platform: :jruby
 gem 'mysql2', platform: :ruby
 gem 'thinking-sphinx'
+
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
